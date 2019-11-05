@@ -22,7 +22,8 @@ d3.gantt = function() {
     var height = document.body.clientHeight - margin.top - margin.bottom-5;
     var width = document.body.clientWidth - margin.right - margin.left-5;
 
-    var tickFormat = "%H:%M";
+    // var tickFormat = "%H:%M";
+    var tickFormat = "%B %Y";
 
     var keyFunction = function(d) {
 	return d.startDate + d.taskName + d.endDate;
@@ -98,7 +99,11 @@ d3.gantt = function() {
 	 .attr("height", function(d) { return y.rangeBand(); })
 	 .attr("width", function(d) { 
 	     return Math.max(1,(x(d.endDate) - x(d.startDate))); 
-	     });
+	     })
+   .on("click", function(d) {
+      console.log("rect", d.taskName);
+      d3.event.stopPropagation();
+    });
 	 
 	 
 	 svg.append("g")
